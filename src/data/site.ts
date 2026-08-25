@@ -28,6 +28,7 @@ export const NAV = [
   { label: '施設・設備', href: '/facility/' },
   { label: 'サービス', href: '/#services' },
   { label: '料金プラン', href: '/price/' },
+  { label: 'スタッフ', href: '/staff/' },
   { label: 'ブログ', href: '/blog/' },
   { label: 'よくある質問', href: '/faq/' },
   { label: 'アクセス', href: '/access/' },

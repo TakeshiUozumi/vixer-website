@@ -81,6 +81,7 @@ a {
 
 img {
   max-width: 100%;
+  height: auto; /* width/height属性による縦横比の固定を解除（CSS側の指定が優先される） */
   display: block;
 }
 

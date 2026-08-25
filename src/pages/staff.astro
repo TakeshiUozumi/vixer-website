@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaTrial from '../components/CtaTrial.astro';
+
+// 名前・経歴・資格・写真は確定後に差し替えてください（写真: public/images/staff-*.jpg）
+const STAFF = [
+  {
+    role: '代表',
+    roleEn: 'Representative',
+    name: '（お名前）',
+    image: '/images/staff-placeholder.svg',
+    message:
+      '「健康を通じて、人生を豊かに。」その想いで Life Design ViXer を立ち上げました。鍛えることだけでなく、まず整えること。お一人おひとりの人生に寄り添うジムでありたいと考えています。FMKOCHIのラジオ番組でも健康情報を発信中です。',
+  },
+  {
+    role: 'パーソナルトレーナー',
+    roleEn: 'Personal Trainer',
+    name: '（お名前）',
+    image: '/images/staff-placeholder.svg',
+    message:
+      '理学療法士などの資格を活かし、身体の状態を見極めた上で無理のないプログラムをご提案します。初心者の方こそ大歓迎。マシンの使い方から丁寧にサポートしますので、安心してお越しください。',
+  },
+  {
+    role: 'ヘッドスパセラピスト',
+    roleEn: 'Head Spa Therapist',
+    name: '（お名前）',
+    image: '/images/staff-placeholder.svg',
+    message:
+      'トレーニング後のリフレッシュに、50分のヘッドスパはいかがですか。日々の疲れやストレスをほどいて、心と身体の両方を整えるお手伝いをします。',
+  },
+  {
+    role: '事務スタッフ',
+    roleEn: 'Staff',
+    name: '（お名前）',
+    image: '/images/staff-placeholder.svg',
+    message:
+      'ご入会の手続きやプランのご相談など、受付にてお待ちしています。分からないことは何でもお気軽にお声がけください。皆さまが通いやすいジムづくりを支えています。',
+  },
+];
+---
+
+<Base
+  title="スタッフ紹介"
+  description="Life Design ViXer のスタッフ紹介。代表・パーソナルトレーナー・ヘッドスパセラピスト・事務スタッフが、あなたの健康づくりを支えます。"
+>
+  <PageHero
+    eyebrow="Staff"
+    title="スタッフ紹介"
+    lead="有資格スタッフが、あなたの「整える」と「鍛える」を支えます。"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="staff-grid">
+        {STAFF.map((s) => (
+          <article class="staff card reveal">
+            <figure class="staff__photo">
+              <img src={s.image} alt={`${s.role}の写真`} width="400" height="500" loading="lazy" />
+            </figure>
+            <div class="staff__body">
+              <p class="staff__role-en">{s.roleEn}</p>
+              <p class="staff__role">{s.role}</p>
+              <h2 class="staff__name">{s.name}</h2>
+              <p class="staff__message">{s.message}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaTrial />
+</Base>
+
+<style>
+  .staff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .staff {
+    display: flex;
+  }
+
+  .staff__photo {
+    margin: 0;
+    flex: 0 0 42%;
+  }
+
+  .staff__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .staff__body {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .staff__role-en {
+    font-family: var(--font-latin);
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .staff__role {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+    margin-top: 0.5rem;
+  }
+
+  .staff__name {
+    font-size: var(--text-xl);
+    margin-block: 0.5rem 1rem;
+  }
+
+  .staff__message {
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
+  @media (max-width: 900px) {
+    .staff-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .staff {
+      flex-direction: column;
+    }
+    .staff__photo {
+      flex: none;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+  }
+</style>

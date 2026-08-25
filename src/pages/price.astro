@@ -57,6 +57,30 @@ const TICKETS = [
         パーソナルトレーニング（50分）・ヘッドスパ（50分）にご利用いただけます。<br />
         予約制：平日 10:00〜21:00／土日祝 10:00〜18:30
       </p>
+
+      <div class="services">
+        <figure class="service card reveal">
+          <img src="/images/blog-backpain.jpg" alt="パーソナルトレーニングの様子" width="900" height="600" loading="lazy" />
+          <figcaption>
+            <p class="service__en">Personal Training</p>
+            <h3 class="service__title">パーソナルトレーニング（50分）</h3>
+            <p class="service__body">
+              有資格トレーナーがマンツーマンで指導。姿勢や身体の状態を見極め、目的に合わせたメニューを組み立てます。フォームの習得から本格的なボディメイクまで、初心者の方も安心です。
+            </p>
+          </figcaption>
+        </figure>
+        <figure class="service card reveal">
+          <img src="/images/esthetic.jpg" alt="ヘッドスパの施術ルーム" width="900" height="600" loading="lazy" />
+          <figcaption>
+            <p class="service__en">Head Spa</p>
+            <h3 class="service__title">ヘッドスパ（50分）</h3>
+            <p class="service__body">
+              トレーニング後のご褒美に、頭皮からほぐす50分のリラクゼーション。日々の疲れやストレスを解きほぐし、心と身体の両方を整えます。鍛える日と癒やす日、どちらもViXerで。
+            </p>
+          </figcaption>
+        </figure>
+      </div>
+
       <div class="tickets">
         {TICKETS.map((t) => (
           <div class:list={['ticket', 'card', 'reveal', { 'ticket--popular': t.popular }]}>
@@ -74,8 +98,16 @@ const TICKETS = [
     <div class="container container--narrow">
       <SectionHead eyebrow="Options" title="オプション" />
       <dl class="options reveal">
-        <div><dt>水素水</dt><dd>1,100円／月</dd></div>
-        <div><dt>契約ロッカー</dt><dd>550円／月</dd></div>
+        <div>
+          <img src="/images/concept.jpg" alt="" width="80" height="80" loading="lazy" class="options__img" />
+          <dt>水素水</dt>
+          <dd>1,100円／月</dd>
+        </div>
+        <div>
+          <img src="/images/locker.svg" alt="" width="80" height="80" loading="lazy" class="options__img" />
+          <dt>契約ロッカー</dt>
+          <dd>550円／月</dd>
+        </div>
       </dl>
       <p class="options__note reveal">
         ※お支払いはクレジットカードのみの対応となります。<br />
@@ -227,20 +259,72 @@ const TICKETS = [
     color: var(--paper-faint);
   }
 
+  .services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .service {
+    margin: 0;
+    background: var(--ink);
+    overflow: hidden;
+  }
+
+  .service img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .service figcaption {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .service__en {
+    font-family: var(--font-latin);
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .service__title {
+    font-size: var(--text-lg);
+    margin-bottom: 0.75rem;
+  }
+
+  .service__body {
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
   .options div {
     display: flex;
-    justify-content: space-between;
-    padding-block: 1.25rem;
+    align-items: center;
+    gap: 1.25rem;
+    padding-block: 1rem;
     border-bottom: 1px solid var(--line);
     font-family: var(--font-display);
   }
+
+  .options__img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+
 
   .options div:first-child {
     border-top: 1px solid var(--line);
   }
 
   .options dd {
-    margin: 0;
+    margin: 0 0 0 auto;
     color: var(--gold);
   }
 
@@ -256,7 +340,8 @@ const TICKETS = [
   }
 
   @media (max-width: 767px) {
-    .plans {
+    .plans,
+    .services {
       grid-template-columns: 1fr;
     }
     .tickets {

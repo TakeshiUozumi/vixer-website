@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import CtaContact from '../../components/CtaContact.astro';
+import { CATEGORIES } from '../../data/categories';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Base
+  title="健康コラム"
+  description="Life Design ViXer の健康コラム。睡眠・ダイエット・腰痛・食事・ストレスなど、暮らしに活きる健康のヒントを有資格スタッフがお届けします。"
+>
+  <PageHero
+    eyebrow="Health Column"
+    title="健康コラム"
+    lead="睡眠・ダイエット・腰痛・食事・ストレス。暮らしに活きる健康のヒントをお届けします。"
+  />
+
+  <section class="section">
+    <div class="container">
+      <nav class="cats reveal" aria-label="カテゴリ">
+        <a href="/blog/" class="cats__link is-active" aria-current="page">すべて</a>
+        {Object.entries(CATEGORIES).map(([id, label]) => (
+          <a href={`/blog/category/${id}/`} class="cats__link">{label}</a>
+        ))}
+      </nav>
+
+      <div class="grid">
+        {posts.map((post) => (
+          <div class="reveal">
+            <BlogCard
+              slug={post.id}
+              title={post.data.title}
+              category={post.data.category}
+              date={post.data.date}
+              image={post.data.image}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaContact />
+</Base>
+
+<style>
+  .cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+  }
+
+  .cats__link {
+    font-size: var(--text-sm);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.45rem 1.4rem;
+    color: var(--paper-dim);
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .cats__link:hover {
+    border-color: var(--gold);
+    color: var(--paper);
+  }
+
+  .cats__link.is-active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 1023px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

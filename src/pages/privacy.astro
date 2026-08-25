@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/site';
+---
+
+<Base title="プライバシーポリシー" description="Life Design ViXer のプライバシーポリシー（個人情報保護方針）です。">
+  <PageHero eyebrow="Privacy Policy" title="プライバシーポリシー" />
+
+  <section class="section">
+    <div class="container container--narrow policy">
+      <p>
+        Life Design ViXer（以下「当店」）は、お客様の個人情報の重要性を認識し、以下の方針に基づき個人情報の保護に努めます。
+      </p>
+
+      <h2>1. 個人情報の取得について</h2>
+      <p>
+        当店は、入会手続き、無料体験のご予約、お問い合わせ等に際して、氏名・連絡先などの個人情報を適法かつ公正な手段により取得します。
+      </p>
+
+      <h2>2. 個人情報の利用目的</h2>
+      <ul>
+        <li>会員管理およびサービスのご提供のため</li>
+        <li>ご予約・お問い合わせへの対応のため</li>
+        <li>キャンペーン・営業に関するご案内のため</li>
+        <li>サービス向上のための分析のため</li>
+      </ul>
+
+      <h2>3. 個人情報の第三者提供</h2>
+      <p>
+        当店は、法令に基づく場合を除き、ご本人の同意なく個人情報を第三者に提供いたしません。
+      </p>
+
+      <h2>4. 個人情報の管理</h2>
+      <p>
+        当店は、個人情報の漏えい・滅失・毀損の防止のため、適切な安全管理措置を講じます。
+      </p>
+
+      <h2>5. 開示・訂正・削除について</h2>
+      <p>
+        ご本人からの個人情報の開示・訂正・削除のご請求には、本人確認のうえ、合理的な範囲で速やかに対応いたします。
+      </p>
+
+      <h2>6. お問い合わせ窓口</h2>
+      <p>
+        {SITE.name}<br />
+        {SITE.address}<br />
+        TEL：{SITE.tel}
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .policy p,
+  .policy ul {
+    color: var(--paper-dim);
+    font-size: var(--text-sm);
+    margin-bottom: 1.5em;
+  }
+
+  .policy ul {
+    padding-left: 1.5em;
+    list-style: disc;
+  }
+
+  .policy h2 {
+    font-size: var(--text-lg);
+    margin: 2.5em 0 1em;
+    padding-left: 1rem;
+    border-left: 2px solid var(--gold);
+  }
+</style>

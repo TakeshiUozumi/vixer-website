@@ -1,0 +1,145 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaContact from '../components/CtaContact.astro';
+
+const FLOORS = [
+  {
+    floor: '2F',
+    name: '個室ジム・受付フロア',
+    rooms: [
+      {
+        image: '/images/room-private.svg',
+        title: '個室ジム（6部屋）',
+        body: '誰にも見られないプライベート空間。人目を気にせず、自分だけのペースでトレーニングに集中できます。',
+      },
+      {
+        image: '/images/bodyscan.svg',
+        title: '3Dボディスキャン測定コーナー',
+        body: '自分の体を360°可視化。姿勢や体型の変化を数値と形で確認しながら、効果を実感できます。',
+      },
+      {
+        image: '/images/reception.svg',
+        title: '受付',
+        body: 'スタッフ常駐時間内は、トレーニングや生活習慣のご相談をいつでもお受けしています。',
+      },
+    ],
+  },
+  {
+    floor: '3F',
+    name: 'オープンジム・エステフロア',
+    rooms: [
+      {
+        image: '/images/room-open.svg',
+        title: 'オープンジムエリア',
+        body: 'マシンを備えたオープンエリア。24時間365日、ライフスタイルに合わせてご利用いただけます。',
+      },
+      {
+        image: '/images/esthetic.svg',
+        title: 'セルフエステ',
+        body: 'ボディメイクやセルライトケアに対応したセルフエステ機器を完備。鍛えるだけでなく、磨く時間を。',
+      },
+      {
+        image: '/images/shower.svg',
+        title: 'シャワールーム・女性用更衣室',
+        body: 'トレーニング後もそのままお出かけできる、清潔なシャワールームと更衣室をご用意しています。',
+      },
+    ],
+  },
+];
+---
+
+<Base
+  title="施設・設備"
+  description="Life Design ViXer の施設・設備のご案内。完全個室ジム6部屋、24時間オープンジム、セルフエステ、3Dボディスキャン、シャワールームを完備した個室×オープンのハイブリッド型ジムです。"
+>
+  <PageHero
+    eyebrow="Facility"
+    title="施設・設備"
+    lead="完全個室×オープンジムのハイブリッド型。「誰にも見られない集中」と「いつでも使える自由」を、ひとつの施設に。"
+  />
+
+  {FLOORS.map((floor) => (
+    <section class="section floor">
+      <div class="container">
+        <SectionHead eyebrow={`Floor ${floor.floor}`} title={floor.name} />
+        <div class="rooms">
+          {floor.rooms.map((room) => (
+            <figure class="room card reveal">
+              <img src={room.image} alt={room.title} width="900" height="600" loading="lazy" />
+              <figcaption>
+                <h3 class="room__title">{room.title}</h3>
+                <p class="room__body">{room.body}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section support">
+    <div class="container container--narrow reveal">
+      <SectionHead eyebrow="Support" title="人によるサポートも、設備のひとつ" center />
+      <p class="support__body">
+        理学療法士など医療国家資格・トレーナー資格を持つスタッフが常駐し、マシンの使い方から初心者向けメニューの作成までサポートします。設備だけを貸すジムではなく、「続けられる環境」そのものをご提供します。
+      </p>
+    </div>
+  </section>
+
+  <CtaContact />
+</Base>
+
+<style>
+  .floor + .floor {
+    border-top: 1px solid var(--line);
+    background: var(--ink-2);
+  }
+
+  .rooms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .room {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .room img {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .room figcaption {
+    padding: 1.5rem;
+  }
+
+  .room__title {
+    font-size: var(--text-lg);
+    margin-bottom: 0.75rem;
+  }
+
+  .room__body {
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
+  .support {
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .support__body {
+    color: var(--paper-dim);
+  }
+
+  @media (max-width: 767px) {
+    .rooms {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

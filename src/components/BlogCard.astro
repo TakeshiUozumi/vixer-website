@@ -1,0 +1,90 @@
+---
+import { CATEGORIES, type CategoryId } from '../data/categories';
+
+interface Props {
+  slug: string;
+  title: string;
+  category: CategoryId;
+  date: Date;
+  image?: string;
+}
+
+const { slug, title, category, date, image = '/images/blog-sleep.svg' } = Astro.props;
+const fmt = (d: Date) =>
+  `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+---
+
+<a href={`/blog/${slug}/`} class="blog-card card">
+  <div class="blog-card__media">
+    <img src={image} alt="" width="900" height="600" loading="lazy" />
+    <span class="blog-card__cat">{CATEGORIES[category]}</span>
+  </div>
+  <div class="blog-card__body">
+    <h3 class="blog-card__title">{title}</h3>
+    <time class="blog-card__date" datetime={date.toISOString().slice(0, 10)}>{fmt(date)}</time>
+  </div>
+</a>
+
+<style>
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s var(--ease-out);
+  }
+
+  .blog-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+
+  .blog-card__media {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+  }
+
+  .blog-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  .blog-card:hover .blog-card__media img {
+    transform: scale(1.04);
+  }
+
+  .blog-card__cat {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.75rem;
+  }
+
+  .blog-card__body {
+    padding: 1.25rem 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  .blog-card__title {
+    font-size: var(--text-base);
+    font-weight: 500;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .blog-card__date {
+    font-family: var(--font-latin);
+    font-size: var(--text-xs);
+    letter-spacing: 0.15em;
+    color: var(--paper-faint);
+  }
+</style>

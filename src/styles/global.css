@@ -1,0 +1,253 @@
+/* ---------------------------------------------------------------
+   Life Design ViXer — design tokens & base styles
+   Tone: luxury dark (warm ink) × champagne gold
+   --------------------------------------------------------------- */
+
+:root {
+  /* color */
+  --ink: #0e0d0b;            /* page ground — warm black */
+  --ink-2: #16140f;          /* raised surface */
+  --ink-3: #1f1c15;          /* card surface */
+  --gold: #b8a06a;           /* champagne gold accent */
+  --gold-bright: #d6c294;    /* hover / highlight gold */
+  --gold-dim: rgba(184, 160, 106, 0.28);
+  --paper: #f2efe8;          /* primary text */
+  --paper-dim: #b5afa3;      /* secondary text */
+  --paper-faint: #7d776c;    /* captions, meta */
+  --line: rgba(184, 160, 106, 0.18);   /* hairline rules */
+
+  /* type */
+  --font-display: 'Shippori Mincho', 'Hiragino Mincho ProN', serif;
+  --font-body: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --font-latin: 'Marcellus', 'Shippori Mincho', serif;
+
+  /* scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+  --text-hero: clamp(2rem, 1.2rem + 4vw, 3.75rem);
+
+  /* layout */
+  --container: 1160px;
+  --container-narrow: 800px;
+  --space-section: clamp(5rem, 3rem + 8vw, 9rem);
+  --pad-x: clamp(1.25rem, 4vw, 2.5rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  font-feature-settings: 'palt';
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--gold-dim);
+}
+
+/* ---- shared primitives ---- */
+
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+.section {
+  padding-block: var(--space-section);
+}
+
+/* section heading: latin eyebrow + mincho title */
+.sec-head {
+  margin-bottom: clamp(2.5rem, 2rem + 3vw, 4rem);
+}
+
+.sec-head__eyebrow {
+  font-family: var(--font-latin);
+  font-size: var(--text-xs);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sec-head__eyebrow::before {
+  content: '';
+  width: 2.5rem;
+  height: 1px;
+  background: var(--gold);
+}
+
+.sec-head__title {
+  font-size: var(--text-2xl);
+}
+
+.sec-head--center {
+  text-align: center;
+}
+
+.sec-head--center .sec-head__eyebrow {
+  justify-content: center;
+}
+
+.sec-head--center .sec-head__eyebrow::after {
+  content: '';
+  width: 2.5rem;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  letter-spacing: 0.14em;
+  padding: 1rem 2.5rem;
+  border: 1px solid var(--gold);
+  color: var(--paper);
+  background: linear-gradient(to right, var(--gold), var(--gold)) no-repeat left / 0% 100%;
+  transition: background-size 0.5s var(--ease-out), color 0.3s;
+}
+
+.btn::after {
+  content: '\2192';
+  font-family: var(--font-latin);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.btn:hover {
+  background-size: 100% 100%;
+  color: var(--ink);
+}
+
+.btn:hover::after {
+  transform: translateX(4px);
+}
+
+.btn--solid {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.btn--solid:hover {
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+}
+
+/* vertical eyebrow (signature) */
+.tate {
+  writing-mode: vertical-rl;
+  font-family: var(--font-display);
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  font-size: var(--text-sm);
+}
+
+/* hairline card */
+.card {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

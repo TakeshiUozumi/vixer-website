@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaContact from '../components/CtaContact.astro';
+import { SITE } from '../data/site';
+---
+
+<Base
+  title="アクセス"
+  description="Life Design ViXer へのアクセス。高知県高知市筆山町8-8。無料駐車場完備でお車でも通いやすい立地です。24時間365日営業。"
+>
+  <PageHero eyebrow="Access" title="アクセス" lead="高知市筆山町。無料駐車場完備で、お車でも通いやすい立地です。" />
+
+  <section class="section">
+    <div class="container access__grid">
+      <div class="reveal">
+        <SectionHead eyebrow="Information" title="店舗情報" />
+        <dl class="info">
+          <div><dt>店舗名</dt><dd>{SITE.name}</dd></div>
+          <div><dt>住所</dt><dd>{SITE.address}</dd></div>
+          <div><dt>電話</dt><dd><a href={SITE.telHref} class="info__tel">{SITE.tel}</a></dd></div>
+          <div><dt>営業時間</dt><dd>{SITE.hours}<br />{SITE.staffHours}</dd></div>
+          <div><dt>駐車場</dt><dd>{SITE.parking}</dd></div>
+          <div>
+            <dt>お車で</dt>
+            <dd>高知市中心部から約5分。筆山公園のふもと、筆山町エリアです。</dd>
+          </div>
+        </dl>
+        <a href={SITE.mapLink} target="_blank" rel="noopener" class="btn">Googleマップで開く</a>
+      </div>
+      <div class="map reveal">
+        <iframe
+          src={SITE.mapEmbed}
+          title="Life Design ViXer の地図"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <CtaContact />
+</Base>
+
+<style>
+  .access__grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: start;
+  }
+
+  .info {
+    margin: 0 0 2rem;
+  }
+
+  .info div {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 1rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: var(--text-sm);
+  }
+
+  .info div:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .info dt {
+    color: var(--gold);
+    font-family: var(--font-display);
+  }
+
+  .info dd {
+    margin: 0;
+    color: var(--paper-dim);
+  }
+
+  .info__tel {
+    font-family: var(--font-latin);
+    font-size: var(--text-lg);
+    color: var(--paper);
+    letter-spacing: 0.08em;
+  }
+
+  .map {
+    border: 1px solid var(--line);
+    padding: 0.75rem;
+  }
+
+  .map iframe {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 0;
+    display: block;
+    filter: grayscale(0.9) contrast(0.95);
+  }
+
+  @media (max-width: 767px) {
+    .access__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,17 +1,963 @@
 ---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import BlogCard from '../components/BlogCard.astro';
+import CtaContact from '../components/CtaContact.astro';
+import { SITE } from '../data/site';
+import { CATEGORIES } from '../data/categories';
+import { RADIO_EPISODES } from '../data/radio';
+import { GOOGLE_RATING, REVIEWS } from '../data/reviews';
 
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const FEATURES = [
+  {
+    title: '24時間利用可能',
+    body: '365日いつでも。早朝も深夜も、あなたの生活リズムに合わせて。',
+    icon: 'clock',
+  },
+  {
+    title: 'パーソナルトレーニング',
+    body: '有資格トレーナーが、目的と体力に合わせたプログラムをご提案。',
+    icon: 'dumbbell',
+  },
+  {
+    title: 'ピラティス・ヘッドスパ',
+    body: '姿勢改善から癒やしまで。鍛えるだけでなく「整える」時間を。',
+    icon: 'lotus',
+  },
+  {
+    title: '高知市中心部の好立地',
+    body: '筆山町、無料駐車場完備。お車で通いやすい立地です。',
+    icon: 'pin',
+  },
+  {
+    title: '完全個室',
+    body: '誰にも見られないプライベート空間で、トレーニングに集中。',
+    icon: 'door',
+  },
+  {
+    title: '安心のサポート体制',
+    body: '理学療法士など有資格スタッフが、初心者の方も丁寧にサポート。',
+    icon: 'heart',
+  },
+];
+
+const REASONS = [
+  {
+    num: '一',
+    title: 'トレーナーが有資格者のため、安心して続けられる',
+    body: '理学療法士をはじめ、医療国家資格・トレーナー資格を持つスタッフが在籍。経験豊富なトレーナーが、初心者の方にも分かりやすく丁寧にサポートします。',
+  },
+  {
+    num: '二',
+    title: '個室・有酸素も、24時間使い放題',
+    body: '完全個室6部屋とオープンジムのハイブリッド型。周りを気にせず、自分のペースで。ライフスタイルに合わせて24時間いつでも通えます。',
+  },
+  {
+    num: '三',
+    title: '健康をトータルでサポート',
+    body: '運動だけでなく、睡眠・食事・身体の不調まで。3Dボディスキャンによる可視化と、LINEでの無料食事サポートで、あなたの健康を総合的に支えます。',
+  },
+];
+
+const FLOW = [
+  { step: '01', title: 'お問い合わせ', body: '電話・LINE・フォームからご希望の日時をご連絡ください。' },
+  { step: '02', title: '見学・無料体験', body: '施設をご案内し、実際のトレーニングを体験いただきます。' },
+  { step: '03', title: '入会手続き', body: '約20〜30分。プランとご利用方法を丁寧にご説明します。' },
+  { step: '04', title: 'ご利用開始', body: 'その日から24時間いつでも。あなたのペースで始めましょう。' },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+  <!-- 2. Hero -->
+  <section class="hero">
+    <div class="hero__bg" aria-hidden="true">
+      <img src="/images/hero.svg" alt="" width="1920" height="1080" />
+    </div>
+    <p class="hero__tate tate" aria-hidden="true">整える。鍛える。変わる。</p>
+    <div class="hero__inner container">
+      <p class="hero__eyebrow">Personal Gym &amp; 24h Fitness — Kochi</p>
+      <h1 class="hero__title">健康を通じて、<br />人生を豊かに。</h1>
+      <p class="hero__lead">
+        睡眠・ダイエット・身体の不調まで。<br />
+        完全個室×24時間のハイブリッドジムが、あなたの健康をトータルサポート。
+      </p>
+      <div class="hero__cta">
+        <a href="#trial" class="btn btn--solid">30日間無料体験の詳細を見る</a>
+      </div>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- 3. 6つの特徴 -->
+  <section class="section" id="services">
+    <div class="container">
+      <SectionHead eyebrow="Features" title="ViXer の6つの特徴" center />
+      <ul class="features">
+        {FEATURES.map((f) => (
+          <li class="features__item card reveal">
+            <span class="features__icon" aria-hidden="true" data-icon={f.icon}>
+              {f.icon === 'clock' && (
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="16" cy="16" r="12" /><path d="M16 9v7l5 3" /></svg>
+              )}
+              {f.icon === 'dumbbell' && (
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11 16h10M7 11v10M11 9v14M25 11v10M21 9v14M4 13v6M28 13v6" /></svg>
+              )}
+              {f.icon === 'lotus' && (
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M16 6c2.5 3 3.5 6 3.5 9S18 21 16 23c-2-2-3.5-5-3.5-8S13.5 9 16 6Z" /><path d="M7 13c3 .5 5.5 2 7.3 4.2M25 13c-3 .5-5.5 2-7.3 4.2M5 20c3.5 3.5 7.5 5 11 5s7.5-1.5 11-5" /></svg>
+              )}
+              {f.icon === 'pin' && (
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M16 28s9-8.5 9-15a9 9 0 1 0-18 0c0 6.5 9 15 9 15Z" /><circle cx="16" cy="13" r="3.5" /></svg>
+              )}
+              {f.icon === 'door' && (
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="8" y="5" width="16" height="22" /><path d="M8 27h16M20 15v2" /></svg>
+              )}
+              {f.icon === 'heart' && (
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M16 26C9 20.5 5.5 16.5 5.5 12.4A5.4 5.4 0 0 1 16 10a5.4 5.4 0 0 1 10.5 2.4c0 4.1-3.5 8.1-10.5 13.6Z" /></svg>
+              )}
+            </span>
+            <h3 class="features__title">{f.title}</h3>
+            <p class="features__body">{f.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. コンセプト（ViXerの紹介） -->
+  <section class="section concept">
+    <div class="container concept__grid">
+      <div class="concept__text reveal">
+        <SectionHead eyebrow="Concept" title="まずは「整える」から始める" />
+        <p class="concept__body">
+          Life Design ViXer は、高知市筆山町のパーソナルジム＆24時間ジム。<br /><br />
+          鍛える前に、まず整える。姿勢、睡眠、食事、そして心。理学療法士など有資格スタッフが、あなたの身体の状態を丁寧に見極め、無理のない一歩から伴走します。<br /><br />
+          完全個室のプライベート空間と、24時間使えるオープンジム。その両方を、あなたのペースで。
+        </p>
+        <p class="concept__en" aria-hidden="true">{SITE.taglineEn}</p>
+      </div>
+      <figure class="concept__media reveal">
+        <img src="/images/concept.svg" alt="ViXerの施設イメージ" width="1200" height="800" loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- 5. 選ばれる3つの理由 -->
+  <section class="section reasons">
+    <div class="container">
+      <SectionHead eyebrow="Reasons" title="ViXer が選ばれる3つの理由" center />
+      <ol class="reasons__list">
+        {REASONS.map((r) => (
+          <li class="reasons__item reveal">
+            <span class="reasons__num" aria-hidden="true">{r.num}</span>
+            <div>
+              <h3 class="reasons__title">{r.title}</h3>
+              <p class="reasons__body">{r.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. Before / After -->
+  <section class="section ba">
+    <div class="container">
+      <SectionHead eyebrow="Voice of Change" title="お客様の変化" center />
+      <div class="ba__grid">
+        <figure class="card ba__item reveal">
+          <img src="/images/ba-1.svg" alt="お客様のビフォーアフター事例1" width="900" height="700" loading="lazy" />
+          <figcaption>
+            <p class="ba__name">40代・女性／週2回・6ヶ月</p>
+            <p class="ba__note">「体重だけでなく、長年の肩こりと睡眠の質まで変わりました。」</p>
+          </figcaption>
+        </figure>
+        <figure class="card ba__item reveal">
+          <img src="/images/ba-2.svg" alt="お客様のビフォーアフター事例2" width="900" height="700" loading="lazy" />
+          <figcaption>
+            <p class="ba__name">30代・男性／週1回＋個室利用・4ヶ月</p>
+            <p class="ba__note">「仕事帰りの深夜でも通える環境が、続けられた理由です。」</p>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="ba__disclaimer">※効果には個人差があります。写真はイメージです。</p>
+    </div>
+  </section>
+
+  <!-- 7. 30日間無料体験（最重要CTA） -->
+  <section class="section trial" id="trial">
+    <div class="container container--narrow trial__inner reveal">
+      <p class="trial__eyebrow">まずは、気軽に試す</p>
+      <h2 class="trial__title">30日間 無料お試し</h2>
+      <p class="trial__lead">
+        「一度ためしてみたい」「環境が合うか見てみたい」という方へ。<br />
+        ViXer を30日間、無料でご利用いただけるキャンペーンを実施中です。
+      </p>
+      <ul class="trial__points">
+        <li>
+          <span class="trial__point-value">24h</span>
+          <span class="trial__point-label">期間中いつでも利用可能</span>
+        </li>
+        <li>
+          <span class="trial__point-value">¥0</span>
+          <span class="trial__point-label">一度試してから検討できる</span>
+        </li>
+        <li>
+          <span class="trial__point-value">個室</span>
+          <span class="trial__point-label">基礎を学べるパーソナル付き</span>
+        </li>
+      </ul>
+      <div class="trial__cta">
+        <a href={SITE.line} target="_blank" rel="noopener" class="btn btn--solid">LINEで申し込む</a>
+        <a href={SITE.telHref} class="btn">電話で申し込む　{SITE.tel}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. 入会の流れ -->
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Flow" title="ご入会までの流れ" center />
+      <ol class="flow">
+        {FLOW.map((f) => (
+          <li class="flow__item reveal">
+            <span class="flow__step">{f.step}</span>
+            <h3 class="flow__title">{f.title}</h3>
+            <p class="flow__body">{f.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 9. ブログ -->
+  <section class="section blog">
+    <div class="container">
+      <SectionHead eyebrow="Health Column" title="健康コラム" center />
+      <div class="blog__tabs reveal" role="tablist" aria-label="カテゴリで絞り込む">
+        <button class="blog__tab is-active" data-cat="all" role="tab" aria-selected="true">すべて</button>
+        {Object.entries(CATEGORIES).map(([id, label]) => (
+          <button class="blog__tab" data-cat={id} role="tab" aria-selected="false">{label}</button>
+        ))}
+      </div>
+      <div class="blog__grid" id="blog-grid">
+        {posts.map((post, i) => (
+          <div class="blog__cell reveal" data-category={post.data.category} data-index={i}>
+            <BlogCard
+              slug={post.id}
+              title={post.data.title}
+              category={post.data.category}
+              date={post.data.date}
+              image={post.data.image}
+            />
+          </div>
+        ))}
+      </div>
+      <div class="section__more reveal">
+        <a href="/blog/" class="btn">すべての記事を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. 代表ラジオ -->
+  <section class="section radio">
+    <div class="container radio__grid">
+      <div class="radio__intro reveal">
+        <SectionHead eyebrow="On Air" title="FM高知で放送中" />
+        <p class="radio__body">
+          代表がパーソナリティを務めるラジオ番組を FMKOCHI にて放送中。健康づくりのヒントを、毎週お届けしています。過去の放送はアーカイブからお聴きいただけます。
+        </p>
+        <a href="/radio/" class="btn radio__more">アーカイブ一覧を見る</a>
+      </div>
+      <div class="radio__list">
+        {RADIO_EPISODES.slice(0, 3).map((ep) => (
+          <a href="/radio/" class="radio__ep card reveal">
+            <img src="/images/radio-jacket.svg" alt="" width="120" height="120" loading="lazy" />
+            <div>
+              <p class="radio__ep-meta">
+                <span class="radio__ep-num">#{ep.number}</span>
+                <time>{ep.date}</time>
+              </p>
+              <p class="radio__ep-title">{ep.title}</p>
+              <p class="radio__ep-desc">{ep.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. アクセス -->
+  <section class="section access">
+    <div class="container access__grid">
+      <div class="reveal">
+        <SectionHead eyebrow="Access" title="アクセス" />
+        <dl class="access__info">
+          <div><dt>住所</dt><dd>{SITE.address}</dd></div>
+          <div><dt>駐車場</dt><dd>{SITE.parking}</dd></div>
+          <div><dt>営業時間</dt><dd>{SITE.hours}<br />{SITE.staffHours}</dd></div>
+        </dl>
+        <a href="/access/" class="btn">アクセス詳細を見る</a>
+      </div>
+      <div class="access__map reveal">
+        <iframe
+          src={SITE.mapEmbed}
+          title="Life Design ViXer の地図"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Google口コミ -->
+  <section class="section reviews">
+    <div class="container">
+      <SectionHead eyebrow="Reviews" title="Google口コミで高評価" center />
+      <p class="reviews__score reveal">
+        <span class="reviews__stars" aria-hidden="true">★★★★★</span>
+        <span class="reviews__num">{GOOGLE_RATING.score}</span>
+        <span class="reviews__count">（{GOOGLE_RATING.count}）</span>
+      </p>
+      <div class="reviews__grid">
+        {REVIEWS.map((r) => (
+          <blockquote class="reviews__item card reveal">
+            <p class="reviews__body">{r.body}</p>
+            <footer class="reviews__name">{r.name}</footer>
+          </blockquote>
+        ))}
+      </div>
+      <div class="section__more reveal">
+        <a href={SITE.mapLink} target="_blank" rel="noopener" class="btn">Googleの口コミをもっと見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. お問い合わせ（最終CTA） -->
+  <CtaContact />
+</Base>
+
+<style>
+  /* ---- hero ---- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .hero__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(105deg, rgba(14, 13, 11, 0.9) 20%, rgba(14, 13, 11, 0.45) 60%, rgba(14, 13, 11, 0.65)),
+      linear-gradient(to top, var(--ink) 0%, transparent 30%);
+  }
+
+  .hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: kenburns 24s var(--ease-out) both;
+  }
+
+  @keyframes kenburns {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+
+  .hero__tate {
+    position: absolute;
+    top: 50%;
+    right: clamp(1rem, 3vw, 3rem);
+    transform: translateY(-50%);
+    opacity: 0.85;
+  }
+
+  .hero__inner {
+    width: 100%;
+    padding-top: 6rem;
+  }
+
+  .hero__eyebrow {
+    font-family: var(--font-latin);
+    font-size: var(--text-sm);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    animation: rise 1s 0.2s var(--ease-out) both;
+  }
+
+  .hero__title {
+    font-size: var(--text-hero);
+    line-height: 1.4;
+    animation: rise 1s 0.4s var(--ease-out) both;
+  }
+
+  .hero__lead {
+    margin-top: 2rem;
+    color: var(--paper-dim);
+    animation: rise 1s 0.6s var(--ease-out) both;
+  }
+
+  .hero__cta {
+    margin-top: 3rem;
+    animation: rise 1s 0.8s var(--ease-out) both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-latin);
+    font-size: var(--text-xs);
+    letter-spacing: 0.3em;
+    color: var(--paper-faint);
+    text-transform: uppercase;
+    padding-bottom: 3rem;
+  }
+
+  .hero__scroll::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 1px;
+    height: 2.5rem;
+    background: linear-gradient(var(--gold), transparent);
+    animation: drip 2.2s ease-in-out infinite;
+  }
+
+  @keyframes drip {
+    0% { transform: scaleY(0); transform-origin: top; }
+    45% { transform: scaleY(1); transform-origin: top; }
+    55% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ---- features ---- */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .features__item {
+    padding: 2.25rem 1.75rem;
+    text-align: center;
+  }
+
+  .features__icon {
+    display: inline-flex;
+    width: 3.25rem;
+    height: 3.25rem;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .features__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .features__title {
+    font-size: var(--text-lg);
+    margin-bottom: 0.75rem;
+  }
+
+  .features__body {
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
+  /* ---- concept ---- */
+  .concept {
+    background: var(--ink-2);
+    border-block: 1px solid var(--line);
+  }
+
+  .concept__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: center;
+  }
+
+  .concept__body {
+    color: var(--paper-dim);
+  }
+
+  .concept__en {
+    margin-top: 2.5rem;
+    font-family: var(--font-latin);
+    font-size: var(--text-xs);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .concept__media {
+    margin: 0;
+    border: 1px solid var(--line);
+    padding: 0.75rem;
+  }
+
+  /* ---- reasons ---- */
+  .reasons__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 860px;
+    margin-inline: auto;
+  }
+
+  .reasons__item {
+    display: flex;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .reasons__item:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .reasons__num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1.3;
+    flex-shrink: 0;
+  }
+
+  .reasons__title {
+    font-size: var(--text-xl);
+    margin-bottom: 0.75rem;
+  }
+
+  .reasons__body {
+    color: var(--paper-dim);
+    font-size: var(--text-sm);
+  }
+
+  /* ---- before/after ---- */
+  .ba__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .ba__item {
+    margin: 0;
+  }
+
+  .ba__item figcaption {
+    padding: 1.5rem;
+  }
+
+  .ba__name {
+    font-family: var(--font-latin);
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .ba__note {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+  }
+
+  .ba__disclaimer {
+    margin-top: 1.5rem;
+    font-size: var(--text-xs);
+    color: var(--paper-faint);
+    text-align: center;
+  }
+
+  /* ---- trial ---- */
+  .trial {
+    background:
+      radial-gradient(ellipse 70% 90% at 50% 100%, rgba(184, 160, 106, 0.1), transparent),
+      var(--ink-2);
+    border-block: 1px solid var(--gold-dim);
+    text-align: center;
+  }
+
+  .trial__eyebrow {
+    font-family: var(--font-display);
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+  }
+
+  .trial__title {
+    font-size: clamp(2rem, 1.4rem + 3vw, 3.25rem);
+    letter-spacing: 0.1em;
+  }
+
+  .trial__lead {
+    margin-top: 1.75rem;
+    color: var(--paper-dim);
+  }
+
+  .trial__points {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-block: 3rem;
+  }
+
+  .trial__points li {
+    background: var(--ink);
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .trial__point-value {
+    font-family: var(--font-latin);
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .trial__point-label {
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
+  .trial__cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ---- flow ---- */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    counter-reset: flow;
+  }
+
+  .flow__item {
+    position: relative;
+    padding: 1.75rem 1.5rem;
+    border-top: 1px solid var(--gold-dim);
+  }
+
+  .flow__step {
+    font-family: var(--font-latin);
+    font-size: var(--text-sm);
+    letter-spacing: 0.2em;
+    color: var(--gold);
+  }
+
+  .flow__title {
+    font-size: var(--text-lg);
+    margin-block: 0.75rem;
+  }
+
+  .flow__body {
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
+  /* ---- blog ---- */
+  .blog__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .blog__tab {
+    font-size: var(--text-sm);
+    letter-spacing: 0.08em;
+    padding: 0.45rem 1.4rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--paper-dim);
+    transition: border-color 0.3s, color 0.3s, background 0.3s;
+  }
+
+  .blog__tab:hover {
+    border-color: var(--gold);
+    color: var(--paper);
+  }
+
+  .blog__tab.is-active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+
+  .blog__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .blog__cell[hidden] {
+    display: none;
+  }
+
+  .section__more {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  /* ---- radio ---- */
+  .radio {
+    background: var(--ink-2);
+    border-block: 1px solid var(--line);
+  }
+
+  .radio__grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: start;
+  }
+
+  .radio__body {
+    color: var(--paper-dim);
+    margin-bottom: 2rem;
+  }
+
+  .radio__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .radio__ep {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background: var(--ink);
+    transition: border-color 0.3s;
+  }
+
+  .radio__ep:hover {
+    border-color: var(--gold);
+  }
+
+  .radio__ep img {
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  .radio__ep-meta {
+    display: flex;
+    gap: 1rem;
+    font-family: var(--font-latin);
+    font-size: var(--text-xs);
+    letter-spacing: 0.15em;
+    color: var(--paper-faint);
+  }
+
+  .radio__ep-num {
+    color: var(--gold);
+  }
+
+  .radio__ep-title {
+    font-family: var(--font-display);
+    font-size: var(--text-base);
+    margin-block: 0.35rem;
+  }
+
+  .radio__ep-desc {
+    font-size: var(--text-xs);
+    color: var(--paper-dim);
+  }
+
+  /* ---- access ---- */
+  .access__grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(2rem, 4vw, 5rem);
+    align-items: start;
+  }
+
+  .access__info {
+    margin: 0 0 2rem;
+  }
+
+  .access__info div {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: var(--text-sm);
+  }
+
+  .access__info dt {
+    color: var(--gold);
+    font-family: var(--font-display);
+  }
+
+  .access__info dd {
+    margin: 0;
+    color: var(--paper-dim);
+  }
+
+  .access__map {
+    border: 1px solid var(--line);
+    padding: 0.75rem;
+  }
+
+  .access__map iframe {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 0;
+    display: block;
+    filter: grayscale(0.9) contrast(0.95);
+  }
+
+  /* ---- reviews ---- */
+  .reviews__score {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .reviews__stars {
+    color: var(--gold);
+    letter-spacing: 0.2em;
+  }
+
+  .reviews__num {
+    font-family: var(--font-latin);
+    font-size: 2.25rem;
+    color: var(--paper);
+  }
+
+  .reviews__count {
+    font-size: var(--text-sm);
+    color: var(--paper-faint);
+  }
+
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .reviews__item {
+    margin: 0;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .reviews__body {
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+    flex: 1;
+  }
+
+  .reviews__name {
+    font-family: var(--font-latin);
+    font-size: var(--text-xs);
+    letter-spacing: 0.15em;
+    color: var(--gold);
+  }
+
+  /* ---- responsive ---- */
+  @media (max-width: 1023px) {
+    .features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero__tate {
+      display: none;
+    }
+    .features,
+    .ba__grid,
+    .blog__grid,
+    .reviews__grid {
+      grid-template-columns: 1fr;
+    }
+    .concept__grid,
+    .radio__grid,
+    .access__grid {
+      grid-template-columns: 1fr;
+    }
+    .concept__media {
+      order: -1;
+    }
+    .flow {
+      grid-template-columns: 1fr 1fr;
+    }
+    .trial__points {
+      grid-template-columns: 1fr;
+    }
+    .reasons__item {
+      gap: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.blog__tab');
+  const cells = document.querySelectorAll<HTMLElement>('.blog__cell');
+
+  const apply = (cat: string) => {
+    let shown = 0;
+    cells.forEach((cell) => {
+      const match = cat === 'all' || cell.dataset.category === cat;
+      const visible = match && shown < 3;
+      cell.hidden = !visible;
+      if (visible) shown++;
+    });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        t.classList.toggle('is-active', t === tab);
+        t.setAttribute('aria-selected', String(t === tab));
+      });
+      apply(tab.dataset.cat ?? 'all');
+    });
+  });
+
+  apply('all');
+</script>

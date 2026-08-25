@@ -1,0 +1,166 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaContact from '../components/CtaContact.astro';
+import { FAQ } from '../data/faq';
+import { SITE } from '../data/site';
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.flatMap((cat) =>
+    cat.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    }))
+  ),
+};
+---
+
+<Base
+  title="よくある質問"
+  description="Life Design ViXer のよくある質問。入会・無料体験、料金・お支払い、24時間利用、パーソナルトレーニングやピラティスについてお答えします。"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} is:inline />
+
+  <PageHero
+    eyebrow="FAQ"
+    title="よくある質問"
+    lead="ご不明な点がございましたら、LINE またはお電話でもお気軽にお問い合わせください。"
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <nav class="faq-nav reveal" aria-label="質問カテゴリ">
+        {FAQ.map((cat) => (
+          <a href={`#${cat.id}`} class="faq-nav__link">{cat.label}</a>
+        ))}
+      </nav>
+
+      {FAQ.map((cat) => (
+        <div class="faq-cat" id={cat.id}>
+          <SectionHead eyebrow="Q & A" title={cat.label} />
+          <div class="faq-list">
+            {cat.items.map((item) => (
+              <details class="faq-item card reveal">
+                <summary class="faq-item__q">
+                  <span class="faq-item__mark" aria-hidden="true">Q</span>
+                  <span class="faq-item__text">{item.q}</span>
+                  <span class="faq-item__toggle" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-item__a">
+                  <span class="faq-item__mark faq-item__mark--a" aria-hidden="true">A</span>
+                  <p>{item.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CtaContact />
+</Base>
+
+<style>
+  .faq-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 4rem;
+  }
+
+  .faq-nav__link {
+    font-size: var(--text-sm);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.45rem 1.4rem;
+    color: var(--paper-dim);
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .faq-nav__link:hover {
+    border-color: var(--gold);
+    color: var(--paper);
+  }
+
+  .faq-cat + .faq-cat {
+    margin-top: 4rem;
+  }
+
+  .faq-cat {
+    scroll-margin-top: 6rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item__q {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    letter-spacing: 0.06em;
+  }
+
+  .faq-item__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__mark {
+    font-family: var(--font-latin);
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .faq-item__mark--a {
+    color: var(--paper-faint);
+  }
+
+  .faq-item__text {
+    flex: 1;
+  }
+
+  .faq-item__toggle {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  .faq-item__toggle::before,
+  .faq-item__toggle::after {
+    content: '';
+    position: absolute;
+    inset: 50% 0 auto;
+    height: 1px;
+    background: var(--gold);
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .faq-item__toggle::after {
+    transform: rotate(90deg);
+  }
+
+  .faq-item[open] .faq-item__toggle::after {
+    transform: rotate(0deg);
+  }
+
+  .faq-item__a {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1.5rem 1.5rem;
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+</style>

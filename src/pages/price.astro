@@ -1,0 +1,266 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import CtaContact from '../components/CtaContact.astro';
+import { SITE } from '../data/site';
+
+const TICKETS = [
+  { count: '1回分', price: '5,500', per: '5,500' },
+  { count: '8回分', price: '40,000', per: '5,000', popular: false },
+  { count: '16回分', price: '72,000', per: '4,500', popular: true },
+  { count: '24回分', price: '96,000', per: '4,000', popular: false },
+];
+---
+
+<Base
+  title="料金プラン"
+  description="Life Design ViXer の料金プラン。フルタイム会員 月額9,980円、DAY会員 月額6,980円。パーソナルトレーニング・ヘッドスパに使えるチケットもご用意。入会金無料キャンペーン実施中。"
+>
+  <PageHero
+    eyebrow="Price"
+    title="料金プラン"
+    lead="月額プランとパーソナルチケットの組み合わせで、あなたに合った通い方を。すべて税込価格です。"
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Monthly" title="月額プラン" />
+      <div class="plans">
+        <div class="plan card reveal">
+          <h3 class="plan__name">フルタイム会員</h3>
+          <p class="plan__price"><span>9,980</span>円<small>／月</small></p>
+          <p class="plan__desc">24時間365日、いつでも利用可能。仕事帰りも早朝も、あなたのペースで。</p>
+        </div>
+        <div class="plan card reveal">
+          <h3 class="plan__name">DAY会員</h3>
+          <p class="plan__price"><span>6,980</span>円<small>／月</small></p>
+          <p class="plan__desc">平日5:00〜17:00の利用。日中に通える方におすすめのお得なプランです。</p>
+        </div>
+      </div>
+
+      <div class="admission reveal">
+        <p class="admission__label">入会金</p>
+        <p class="admission__price">
+          <s>5,500円</s>
+          <strong>今なら無料</strong>
+        </p>
+        <p class="admission__note">※入会金無料キャンペーン実施中。時期により内容が変わる場合があります。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tickets-sec">
+    <div class="container">
+      <SectionHead eyebrow="Personal Ticket" title="パーソナルチケット" />
+      <p class="tickets-lead reveal">
+        パーソナルトレーニング（50分）・ヘッドスパ（50分）にご利用いただけます。<br />
+        予約制：平日 10:00〜21:00／土日祝 10:00〜18:30
+      </p>
+      <div class="tickets">
+        {TICKETS.map((t) => (
+          <div class:list={['ticket', 'card', 'reveal', { 'ticket--popular': t.popular }]}>
+            {t.popular && <span class="ticket__badge">人気No.1</span>}
+            <p class="ticket__count">{t.count}</p>
+            <p class="ticket__price"><span>{t.price}</span>円</p>
+            <p class="ticket__per">1回あたり {t.per}円</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section options-sec">
+    <div class="container container--narrow">
+      <SectionHead eyebrow="Options" title="オプション" />
+      <dl class="options reveal">
+        <div><dt>水素水</dt><dd>1,100円／月</dd></div>
+        <div><dt>契約ロッカー</dt><dd>550円／月</dd></div>
+      </dl>
+      <p class="options__note reveal">
+        ※お支払いはクレジットカードのみの対応となります。<br />
+        ※LINEでの食事・生活習慣サポートは無料でご利用いただけます。
+      </p>
+      <div class="options__cta reveal">
+        <a href="/#trial" class="btn btn--solid">まずは30日間無料体験から</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaContact />
+</Base>
+
+<style>
+  .plans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .plan {
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .plan__name {
+    font-size: var(--text-xl);
+    margin-bottom: 1.25rem;
+  }
+
+  .plan__price {
+    font-family: var(--font-display);
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .plan__price span {
+    font-family: var(--font-latin);
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .plan__price small {
+    color: var(--paper-faint);
+    font-size: var(--text-sm);
+  }
+
+  .plan__desc {
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
+  .admission {
+    margin-top: 2.5rem;
+    border: 1px solid var(--gold-dim);
+    padding: 2rem;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 60% 100% at 50% 0%, rgba(184, 160, 106, 0.08), transparent),
+      var(--ink-2);
+  }
+
+  .admission__label {
+    font-family: var(--font-display);
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .admission__price {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .admission__price s {
+    color: var(--paper-faint);
+  }
+
+  .admission__price strong {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    color: var(--paper);
+  }
+
+  .admission__note {
+    font-size: var(--text-xs);
+    color: var(--paper-faint);
+  }
+
+  .tickets-sec {
+    background: var(--ink-2);
+    border-block: 1px solid var(--line);
+  }
+
+  .tickets-lead {
+    color: var(--paper-dim);
+    font-size: var(--text-sm);
+    margin-bottom: 2.5rem;
+  }
+
+  .tickets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  .ticket {
+    position: relative;
+    background: var(--ink);
+    padding: 2.25rem 1.25rem;
+    text-align: center;
+  }
+
+  .ticket--popular {
+    border-color: var(--gold);
+  }
+
+  .ticket__badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--gold);
+    color: var(--ink);
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    padding: 0.2rem 1rem;
+  }
+
+  .ticket__count {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .ticket__price span {
+    font-family: var(--font-latin);
+    font-size: 1.9rem;
+  }
+
+  .ticket__per {
+    margin-top: 0.75rem;
+    font-size: var(--text-xs);
+    color: var(--paper-faint);
+  }
+
+  .options div {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-display);
+  }
+
+  .options div:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .options dd {
+    margin: 0;
+    color: var(--gold);
+  }
+
+  .options__note {
+    margin-top: 1.5rem;
+    font-size: var(--text-xs);
+    color: var(--paper-faint);
+  }
+
+  .options__cta {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .plans {
+      grid-template-columns: 1fr;
+    }
+    .tickets {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

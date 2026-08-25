@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b1812"/>
+      <stop offset="1" stop-color="#0e0d0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect x="57.599999999999994" y="57.599999999999994" width="1804.8" height="964.8" fill="none" stroke="#b8a06a" stroke-opacity="0.35" stroke-width="1.5"/>
+  <circle cx="960" cy="453.6" r="97.2" fill="none" stroke="#b8a06a" stroke-opacity="0.5" stroke-width="1.5"/>
+  <text x="960" y="648" text-anchor="middle" fill="#b8a06a" font-family="Georgia, serif" font-size="48.6" letter-spacing="12.96">LIFE DESIGN VIXER</text>
+  <text x="960" y="756" text-anchor="middle" fill="#7d776c" font-family="serif" font-size="41.04">外観・トレーニング風景</text>
+</svg>

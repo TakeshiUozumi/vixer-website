@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaContact from '../components/CtaContact.astro';
+import { RADIO_EPISODES } from '../data/radio';
+---
+
+<Base
+  title="ラジオアーカイブ"
+  description="Life Design ViXer 代表がパーソナリティを務める FMKOCHI（FM高知）のラジオ番組アーカイブ。健康づくりのヒントを毎週お届けしています。"
+>
+  <PageHero
+    eyebrow="Radio Archive"
+    title="FM高知 ラジオアーカイブ"
+    lead="代表がパーソナリティを務めるラジオ番組を FMKOCHI にて放送中。過去の放送回をご紹介します。"
+  />
+
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="eps">
+        {RADIO_EPISODES.map((ep) => (
+          <article class="ep card reveal">
+            <img src="/images/radio-jacket.svg" alt="" width="160" height="160" loading="lazy" />
+            <div>
+              <p class="ep__meta">
+                <span class="ep__num">#{ep.number}</span>
+                <time>{ep.date} 放送</time>
+              </p>
+              <h2 class="ep__title">{ep.title}</h2>
+              <p class="ep__desc">{ep.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="eps__note reveal">
+        ※過去の放送回は順次アーカイブを追加していきます。最新の放送情報は Instagram・LINE でお知らせします。
+      </p>
+    </div>
+  </section>
+
+  <CtaContact />
+</Base>
+
+<style>
+  .eps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .ep {
+    display: flex;
+    gap: 1.75rem;
+    padding: 1.75rem;
+  }
+
+  .ep img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .ep__meta {
+    display: flex;
+    gap: 1rem;
+    font-family: var(--font-latin);
+    font-size: var(--text-xs);
+    letter-spacing: 0.15em;
+    color: var(--paper-faint);
+    margin-bottom: 0.5rem;
+  }
+
+  .ep__num {
+    color: var(--gold);
+  }
+
+  .ep__title {
+    font-size: var(--text-lg);
+    margin-bottom: 0.75rem;
+  }
+
+  .ep__desc {
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
+  .eps__note {
+    margin-top: 2rem;
+    font-size: var(--text-xs);
+    color: var(--paper-faint);
+  }
+
+  @media (max-width: 560px) {
+    .ep {
+      flex-direction: column;
+    }
+  }
+</style>

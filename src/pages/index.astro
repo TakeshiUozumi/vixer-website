@@ -76,7 +76,7 @@ const FLOW = [
   <!-- 2. Hero -->
   <section class="hero">
     <div class="hero__bg" aria-hidden="true">
-      <img src="/images/hero.svg" alt="" width="1920" height="1080" />
+      <img src="/images/hero.jpg" alt="" width="1920" height="1080" />
     </div>
     <p class="hero__tate tate" aria-hidden="true">整える。鍛える。変わる。</p>
     <div class="hero__inner container">
@@ -143,7 +143,7 @@ const FLOW = [
         <p class="concept__en" aria-hidden="true">{SITE.taglineEn}</p>
       </div>
       <figure class="concept__media reveal">
-        <img src="/images/concept.svg" alt="ViXerの施設イメージ" width="1200" height="800" loading="lazy" />
+        <img src="/images/concept.jpg" alt="ViXerの施設イメージ" width="1200" height="800" loading="lazy" />
       </figure>
     </div>
   </section>
@@ -172,21 +172,21 @@ const FLOW = [
       <SectionHead eyebrow="Voice of Change" title="お客様の変化" center />
       <div class="ba__grid">
         <figure class="card ba__item reveal">
-          <img src="/images/ba-1.svg" alt="お客様のビフォーアフター事例1" width="900" height="700" loading="lazy" />
+          <img src="/images/ba-1.jpg" alt="お客様のビフォーアフター事例1" width="486" height="440" loading="lazy" />
           <figcaption>
-            <p class="ba__name">40代・女性／週2回・6ヶ月</p>
-            <p class="ba__note">「体重だけでなく、長年の肩こりと睡眠の質まで変わりました。」</p>
+            <p class="ba__name">Case 01</p>
+            <p class="ba__note">運動と食事の両面からサポートした、お客様の変化事例です。</p>
           </figcaption>
         </figure>
         <figure class="card ba__item reveal">
-          <img src="/images/ba-2.svg" alt="お客様のビフォーアフター事例2" width="900" height="700" loading="lazy" />
+          <img src="/images/ba-2.jpg" alt="お客様のビフォーアフター事例2" width="486" height="420" loading="lazy" />
           <figcaption>
-            <p class="ba__name">30代・男性／週1回＋個室利用・4ヶ月</p>
-            <p class="ba__note">「仕事帰りの深夜でも通える環境が、続けられた理由です。」</p>
+            <p class="ba__name">Case 02</p>
+            <p class="ba__note">ご自身のペースで継続いただいた、お客様の変化事例です。</p>
           </figcaption>
         </figure>
       </div>
-      <p class="ba__disclaimer">※効果には個人差があります。写真はイメージです。</p>
+      <p class="ba__disclaimer">※効果には個人差があります。</p>
     </div>
   </section>
 
@@ -278,7 +278,7 @@ const FLOW = [
       <div class="radio__list">
         {RADIO_EPISODES.slice(0, 3).map((ep) => (
           <a href="/radio/" class="radio__ep card reveal">
-            <img src="/images/radio-jacket.svg" alt="" width="120" height="120" loading="lazy" />
+            <img src="/images/radio-jacket.jpg" alt="" width="120" height="120" loading="lazy" />
             <div>
               <p class="radio__ep-meta">
                 <span class="radio__ep-num">#{ep.number}</span>
@@ -599,7 +599,8 @@ const FLOW = [
   /* ---- trial ---- */
   .trial {
     background:
-      radial-gradient(ellipse 70% 90% at 50% 100%, rgba(184, 160, 106, 0.1), transparent),
+      linear-gradient(rgba(14, 13, 11, 0.88), rgba(14, 13, 11, 0.82)),
+      url('/images/trial-bg.jpg') center / cover no-repeat,
       var(--ink-2);
     border-block: 1px solid var(--gold-dim);
     text-align: center;

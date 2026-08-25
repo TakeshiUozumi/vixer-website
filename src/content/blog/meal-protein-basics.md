@@ -3,7 +3,7 @@ title: トレーニング効果を高める食事の基本
 description: せっかくのトレーニングを結果につなげるために。運動前後の食事のタイミングと内容の基本をまとめました。
 category: meal
 date: 2024-05-10
-image: /images/blog-meal.svg
+image: /images/blog-meal.jpg
 ---
 
 トレーニングの効果は、運動そのものだけでなく「何を、いつ食べるか」で大きく変わります。

@@ -3,7 +3,7 @@ title: 運動がストレス解消に効く理由
 description: 気分が晴れない、イライラが続く——そんなときこそ体を動かしてみませんか。運動とこころの関係をやさしく解説します。
 category: stress
 date: 2024-05-05
-image: /images/blog-stress.svg
+image: /images/blog-stress.jpg
 ---
 
 「運動したあと、なんだか気分がすっきりした」という経験はありませんか。運動とこころの状態には、深い関わりがあります。

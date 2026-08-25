@@ -3,7 +3,7 @@ title: 痩せやすい体をつくる食事のポイント
 description: 極端な食事制限は続きません。無理なく痩せやすい体をつくるための、食事の考え方と実践のコツをご紹介します。
 category: diet
 date: 2024-05-15
-image: /images/blog-diet.svg
+image: /images/blog-diet.jpg
 ---
 
 ダイエットというと「食べない」ことを思い浮かべがちですが、極端な制限はリバウンドのもと。大切なのは、痩せやすい体をつくる食べ方です。

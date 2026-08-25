@@ -30,26 +30,24 @@ image: /images/blog-sleep.svg   # 任意
 本文をここに書く。
 ```
 
-## 画像の差し替え
+## 画像
 
-`public/images/` のプレースホルダSVGを、実写真またはAI生成画像（Codex等）に差し替えてください。
-差し替え後は各ファイルの参照パス（拡張子）を更新します。主な参照箇所: `src/pages/*.astro`、`src/data/site.ts`、ブログ記事frontmatter。
+`public/images/` にAI生成画像（Web用に圧縮済みJPEG）を配置済み。元の高解像度PNGは `source-images/`（gitignore対象・ローカルのみ）に保管しています。
 
-| ファイル | 内容 | 推奨サイズ |
-|---|---|---|
-| `hero.svg` | トップのヒーロー（外観・トレーニング風景） | 1920×1080 |
-| `concept.svg` | コンセプトセクション | 1200×800 |
-| `room-private.svg` | 個室ジム | 900×600 |
-| `room-open.svg` | オープンジムエリア | 900×600 |
-| `esthetic.svg` | セルフエステ | 900×600 |
-| `shower.svg` | シャワールーム | 900×600 |
-| `bodyscan.svg` | 3Dボディスキャン | 900×600 |
-| `reception.svg` | 受付 | 900×600 |
-| `ba-1.svg` / `ba-2.svg` | ビフォーアフター | 900×700 |
-| `radio-jacket.svg` | ラジオ番組ジャケット | 800×800 |
-| `blog-*.svg` | ブログカテゴリ別アイキャッチ | 900×600 |
+| ファイル | 内容 |
+|---|---|
+| `hero.jpg` | トップのヒーロー |
+| `concept.jpg` | コンセプトセクション |
+| `room-private.jpg` / `room-open.jpg` | 個室ジム／オープンジム |
+| `esthetic.jpg` / `shower.jpg` / `bodyscan.jpg` / `reception.jpg` | 施設各所 |
+| `ba-1.jpg` / `ba-2.jpg` | ビフォーアフター（実際のお客様写真） |
+| `radio-jacket.jpg` | ラジオ番組ジャケット |
+| `blog-*.jpg` | ブログカテゴリ別アイキャッチ |
+| `trial-bg.jpg` | 30日体験セクションの背景 |
+| `ogp.jpg` | SNSシェア用OGP（1200×630） |
+| `home-image01.jpg` | 実際の指導風景（未使用・予備） |
 
-OGP用に `public/images/ogp.png`（1200×630）も用意し、`src/layouts/Base.astro` の `ogImage` 既定値を差し替えると理想的です。
+差し替える場合は同名ファイルを上書きするだけです（実写真への入れ替え推奨箇所: 施設写真・ヒーロー）。
 
 ## 公開前チェックリスト
 

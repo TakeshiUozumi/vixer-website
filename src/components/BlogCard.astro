@@ -9,7 +9,7 @@ interface Props {
   image?: string;
 }
 
-const { slug, title, category, date, image = '/images/blog-sleep.svg' } = Astro.props;
+const { slug, title, category, date, image = '/images/blog-sleep.jpg' } = Astro.props;
 const fmt = (d: Date) =>
   `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
 ---

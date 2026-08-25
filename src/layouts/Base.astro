@@ -10,7 +10,7 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = SITE.description, ogImage = '/images/hero.svg' } = Astro.props;
+const { title, description = SITE.description, ogImage = '/images/ogp.jpg' } = Astro.props;
 const pageTitle = title ? `${title}｜${SITE.name}` : `${SITE.name}｜高知のパーソナルジム＆24時間ジム`;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 ---
@@ -57,7 +57,7 @@ const canonical = new URL(Astro.url.pathname, SITE.url).href;
           streetAddress: '筆山町8-8',
         },
         openingHours: 'Mo-Su 00:00-24:00',
-        image: new URL('/images/hero.svg', SITE.url).href,
+        image: new URL('/images/hero.jpg', SITE.url).href,
       })}
     />
   </head>

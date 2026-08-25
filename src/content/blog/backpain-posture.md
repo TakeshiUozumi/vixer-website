@@ -3,7 +3,7 @@ title: 腰痛を予防する正しい姿勢とは？
 description: デスクワークや立ち仕事でつらい腰。腰痛を予防するための姿勢のポイントと、日常でできる簡単なケアをご紹介します。
 category: backpain
 date: 2024-05-17
-image: /images/blog-backpain.svg
+image: /images/blog-backpain.jpg
 ---
 
 腰痛の多くは、日々の姿勢の積み重ねと深く関わっています。理学療法士などの有資格スタッフが在籍する ViXer から、姿勢のポイントをお伝えします。

@@ -85,11 +85,14 @@ const FLOW = [
     <p class="hero__tate tate" aria-hidden="true">整える。鍛える。変わる。</p>
     <div class="hero__inner container">
       <p class="hero__eyebrow">Personal Gym &amp; 24h Fitness — Kochi</p>
-      <h1 class="hero__title">健康を通じて、<br />人生を豊かに。</h1>
+      <h1 class="hero__title">人目を気にせず、<br />運動を習慣に。</h1>
       <p class="hero__lead">
-        睡眠・ダイエット・身体の不調まで。<br />
-        完全個室×24時間のハイブリッドジムが、あなたの健康をトータルサポート。
+        理学療法士などの有資格者が支える、<br class="pc-br" />初心者向け完全個室×24時間ジム。
       </p>
+      <ul class="hero__facts" aria-label="基本情報">
+        <li>高知市筆山町・無料駐車場完備</li>
+        <li>月額6,980円〜</li>
+      </ul>
       <div class="hero__cta">
         <a href="#trial" class="btn-cta">30日間無料体験はこちら</a>
         <a href={SITE.memberPortal} target="_blank" rel="noopener" class="btn-white">会員サイトはこちら</a>
@@ -440,6 +443,23 @@ const FLOW = [
     margin-top: 2rem;
     color: var(--paper-dim);
     animation: rise 1s 0.6s var(--ease-out) both;
+  }
+
+  .hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    animation: rise 1s 0.7s var(--ease-out) both;
+  }
+
+  .hero__facts li {
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    color: var(--gold-bright);
+    border: 1px solid var(--gold-dim);
+    background: rgba(14, 13, 11, 0.55);
+    padding: 0.35rem 1rem;
   }
 
   .hero__cta {
@@ -988,7 +1008,8 @@ const FLOW = [
   }
 
   @media (max-width: 767px) {
-    .hero__tate {
+    .hero__tate,
+    .pc-br {
       display: none;
     }
     .ba__grid,

@@ -1,4 +1,4 @@
-<div class="sticky-cta" id="sticky-cta">
+<div class="sticky-cta is-hidden" id="sticky-cta">
   <a href="/#trial" class="btn-cta sticky-cta__btn">30日間無料体験はこちら</a>
 </div>
 
@@ -8,58 +8,49 @@
     inset-inline: 0;
     bottom: 0;
     z-index: 90;
-    display: flex;
-    justify-content: center;
-    padding: 0.75rem var(--pad-x) calc(0.75rem + env(safe-area-inset-bottom));
-    background: linear-gradient(to top, rgba(14, 13, 11, 0.95) 40%, transparent);
-    pointer-events: none;
     transition: transform 0.45s var(--ease-out), opacity 0.45s;
   }
 
+  /* 左右いっぱいのバー型CTA */
   .sticky-cta__btn {
-    pointer-events: auto;
-    width: min(100%, 420px);
-    font-size: var(--text-base);
+    width: 100%;
+    font-size: clamp(0.8rem, 3.4vw, 1.1875rem);
+    letter-spacing: clamp(0.06em, 0.5vw, 0.16em);
+    white-space: nowrap;
+    padding: 1.1rem 0.5rem calc(1.1rem + env(safe-area-inset-bottom));
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
   }
 
   .sticky-cta.is-hidden {
     transform: translateY(110%);
     opacity: 0;
   }
-
-  @media (min-width: 768px) {
-    .sticky-cta {
-      justify-content: flex-end;
-      padding-right: 2rem;
-      padding-bottom: 2rem;
-      background: none;
-    }
-
-    .sticky-cta__btn {
-      width: auto;
-    }
-  }
 </style>
 
 <script>
   const bar = document.getElementById('sticky-cta');
-  const trial = document.getElementById('trial');
-  const hero = document.querySelector('.hero');
+  // 体験セクション・ヒーローが見えている間は隠す（同じCTAの重複表示を避ける）
+  const watched = [
+    document.getElementById('trial'),
+    document.querySelector('.hero'),
+    document.querySelector('.cta-trial'),
+  ].filter(Boolean) as Element[];
 
-  // 体験セクションやヒーローが見えている間は隠す（重複表示を避ける）
-  const watched = [trial, hero].filter(Boolean) as Element[];
-  if (bar && watched.length > 0) {
-    const visible = new Set<Element>();
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) visible.add(e.target);
-          else visible.delete(e.target);
-        }
-        bar.classList.toggle('is-hidden', visible.size > 0);
-      },
-      { threshold: 0.2 }
-    );
-    watched.forEach((el) => io.observe(el));
+  if (bar) {
+    const overlapsViewport = (el: Element) => {
+      const r = el.getBoundingClientRect();
+      const overlap = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+      return overlap > window.innerHeight * 0.25;
+    };
+
+    const update = () => {
+      bar.classList.toggle('is-hidden', watched.some(overlapsViewport));
+    };
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
   }
 </script>

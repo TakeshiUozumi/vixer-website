@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import CtaContact from '../../components/CtaContact.astro';
+import CtaTrial from '../../components/CtaTrial.astro';
 import { CATEGORIES } from '../../data/categories';
 
 export async function getStaticPaths() {
@@ -42,7 +42,7 @@ const dateStr = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}
     </footer>
   </article>
 
-  <CtaContact />
+  <CtaTrial />
 </Base>
 
 <style>

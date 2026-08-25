@@ -29,6 +29,9 @@ const year = new Date().getFullYear();
           <li><a href={item.href}>{item.label}</a></li>
         ))}
         <li><a href="/radio/">ラジオアーカイブ</a></li>
+        <li>
+          <a href={SITE.memberPortal} target="_blank" rel="noopener" class="footer__member">会員サイト ↗</a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -118,6 +121,10 @@ const year = new Date().getFullYear();
 
   .footer__nav a:hover {
     color: var(--gold);
+  }
+
+  .footer__member {
+    color: var(--gold) !important;
   }
 
   .footer__bottom {

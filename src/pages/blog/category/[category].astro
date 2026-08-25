@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
 import PageHero from '../../../components/PageHero.astro';
 import BlogCard from '../../../components/BlogCard.astro';
-import CtaContact from '../../../components/CtaContact.astro';
+import CtaTrial from '../../../components/CtaTrial.astro';
 import { CATEGORIES, type CategoryId } from '../../../data/categories';
 
 export async function getStaticPaths() {
@@ -59,7 +59,7 @@ const posts = (await getCollection('blog', (p) => p.data.category === category))
     </div>
   </section>
 
-  <CtaContact />
+  <CtaTrial />
 </Base>
 
 <style>

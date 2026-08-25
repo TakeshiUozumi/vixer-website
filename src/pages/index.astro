@@ -88,6 +88,7 @@ const FLOW = [
       </p>
       <div class="hero__cta">
         <a href="#trial" class="btn-cta">30日間無料体験はこちら</a>
+        <a href={SITE.memberPortal} target="_blank" rel="noopener" class="btn-white">会員サイトはこちら</a>
       </div>
     </div>
     <div class="hero__scroll" aria-hidden="true">
@@ -227,9 +228,11 @@ const FLOW = [
         </li>
       </ul>
       <div class="trial__cta">
-        <a href={SITE.line} target="_blank" rel="noopener" class="btn btn--solid">LINEで申し込む</a>
-        <a href={SITE.telHref} class="btn">電話で申し込む　{SITE.tel}</a>
+        <a href={SITE.line} target="_blank" rel="noopener" class="btn-cta">30日間無料体験はこちら</a>
       </div>
+      <p class="trial__tel">
+        お電話でも受け付けています：<a href={SITE.telHref}>{SITE.tel}</a>（LINEからの申し込みが便利です）
+      </p>
     </div>
   </section>
 
@@ -430,6 +433,9 @@ const FLOW = [
 
   .hero__cta {
     margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
     animation: rise 1s 0.8s var(--ease-out) both;
   }
 
@@ -691,6 +697,18 @@ const FLOW = [
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .trial__tel {
+    margin-top: 1.25rem;
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
+  .trial__tel a {
+    font-family: var(--font-latin);
+    color: var(--gold);
+    letter-spacing: 0.08em;
   }
 
   /* ---- flow ---- */

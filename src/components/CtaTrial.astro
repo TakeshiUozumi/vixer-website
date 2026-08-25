@@ -1,0 +1,64 @@
+---
+import { SITE } from '../data/site';
+---
+
+<section class="section cta-trial">
+  <div class="container container--narrow cta-trial__inner reveal">
+    <p class="cta-trial__eyebrow">まずは、気軽に試す</p>
+    <h2 class="cta-trial__title">30日間 無料お試し</h2>
+    <p class="cta-trial__lead">
+      完全個室・パーソナル付き・24時間利用OK。<br />
+      入会前に、ViXer をじっくり体験いただけます。
+    </p>
+    <div class="cta-trial__btn">
+      <a href="/#trial" class="btn-cta">30日間無料体験はこちら</a>
+    </div>
+    <p class="cta-trial__tel">
+      お電話でも受け付けています：<a href={SITE.telHref}>{SITE.tel}</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .cta-trial {
+    background:
+      linear-gradient(rgba(14, 13, 11, 0.88), rgba(14, 13, 11, 0.82)),
+      url('/images/trial-bg.jpg') center / cover no-repeat,
+      var(--ink-2);
+    border-top: 1px solid var(--gold-dim);
+    text-align: center;
+  }
+
+  .cta-trial__eyebrow {
+    font-family: var(--font-display);
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+  }
+
+  .cta-trial__title {
+    font-size: clamp(1.75rem, 1.3rem + 2.5vw, 2.75rem);
+    letter-spacing: 0.1em;
+  }
+
+  .cta-trial__lead {
+    margin-top: 1.5rem;
+    color: var(--paper-dim);
+  }
+
+  .cta-trial__btn {
+    margin-top: 2.5rem;
+  }
+
+  .cta-trial__tel {
+    margin-top: 1.25rem;
+    font-size: var(--text-sm);
+    color: var(--paper-dim);
+  }
+
+  .cta-trial__tel a {
+    font-family: var(--font-latin);
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+</style>

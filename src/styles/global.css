@@ -264,11 +264,37 @@ button {
   transform: translateX(4px);
 }
 
-/* 追従CTAに隠れないよう、モバイルではフッター下部に余白を確保 */
-@media (max-width: 767px) {
-  footer {
-    padding-bottom: 5.5rem;
-  }
+/* 白ボタン: 会員サイト等のセカンダリ導線 */
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  letter-spacing: 0.14em;
+  padding: 1rem 2.5rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--paper);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease-out);
+}
+
+.btn-white::after {
+  content: '\2197';
+  font-family: var(--font-latin);
+  font-size: 0.9em;
+}
+
+.btn-white:hover {
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+  transform: translateY(-2px);
+}
+
+/* 追従CTAに隠れないよう、フッター下部に余白を確保 */
+footer {
+  padding-bottom: 5rem;
 }
 
 /* vertical eyebrow (signature) */
